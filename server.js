@@ -3,7 +3,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session')
 
 var app = express();
-
+const PORT = process.env.PORT || 3000;
 app.use(session({
   resave: false,
   saveUninitialized: true,
@@ -20,44 +20,6 @@ const studentDao = require('./dao/student.dao.server')
 const questionDao = require('./dao/question.dao.server')
 const answerDao = require('./dao/answer.dao.server')
 
-
-//const sectionDao = require('./dao/section.dao.server');
-//const enrollmentDao = require('./dao/enrollment.dao.server')
-// enrollmentDao.
-//   enrollStudentIntoSection('5bf34e0a0eada8ea44044b05', '5bf35ff7fa839540015cf0bd')
-//   .then(e => console.log(e))
-
-//enrollmentDao.studentEnrollments('5bf34e0a0eada8ea44044b05')
-//  .then(e => console.log(e))
-
-/*studentDao.createStudent({
-    username: "Sougata",
-    password: "1234",
-    firstName: "sougata",
-    lastName: "dafader",
-    gradYear: "2019",
-    scholarship: 9000,
-}).then( student => console.log(student))*/
-
-//studentDao.findStudentById('5c006fe8e59ee955489214b2').then(student=>console.log(student))
-
-//studentDao.updateStudent('5c006fe8e59ee955489214b2',{username:"Dafader"}).then(student=> console.log(student))
-
-//studentDao.deleteStudent('5c006fe8e59ee955489214b2').then(console.log("success"))
-
-/*questionDao.createQuestion({
-    question:"Is the following schema valid?",
-    points: 10,
-    type:"TRUE_FALSE",
-    isTrue: "false",
-    choices:""
-}).then(question => console.log(question))*/
-
-//questionDao.findAllQuestions().then(ques => console.log(ques))
-//questionDao.findQuestionById('5c00759cfdcbe710c01ce786').then(resp => console.log(resp))
-
-//questionDao.updateQuestion('5c00759cfdcbe710c01ce786',{points : "9"}).then(response => console.log(response))
-//questionDao.deleteQuestion('5c00759cfdcbe710c01ce786').then(console.log("success"))
 
 /*answerDao.createAnswer({
     trueFalseAnswer: "true",
@@ -78,11 +40,6 @@ questionService(app)
 const multiactionService = require('./services/multiaction.service.server')
 multiactionService(app)
 
-sayHello = (req, res) => {
-  const user = req.params['user']
-  const message = req.query['message']
-  res.send({user: user, message: message})
-}
 
 createCourse = (req, res) => {
   console.log(req.body)
@@ -90,5 +47,6 @@ createCourse = (req, res) => {
 }
 
 app.post('/api/course', createCourse)
-app.get('/hello/:user', sayHello)
-app.listen(3000);
+app.listen(PORT,() => {
+  console.log('Server is running on port {PORT}');
+});
