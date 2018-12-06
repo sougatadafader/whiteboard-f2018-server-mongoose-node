@@ -27,7 +27,7 @@ const answerDao = require('./dao/answer.dao.server')
     question: '5c00757f1f89eb5694115558'
 }).then(ans => console.log(ans))*/
 
-answerDao.findAllAnswers().then(ans => console.log(ans))
+//answerDao.findAllAnswers().then(ans => console.log(ans))
 //answerDao.findAnswerBySidQid('5c006e8c553b5c06401761e5','5c00757f1f89eb5694115558').then(ans => console.log(ans))
 //answerDao.findAnswerByQidSid('5c00757f1f89eb5694115558','5c006e8c553b5c06401761e5').then(ans =>console.log(ans))
 require('./services/session.service.server')(app)
@@ -36,6 +36,8 @@ const studentService = require('./services/student.service.server.js')
 studentService(app)
 const questionService = require('./services/question.service.server.js')
 questionService(app)
+const answerService = require('./services/answer.service.server.js')
+answerService(app)
 
 const multiactionService = require('./services/multiaction.service.server')
 multiactionService(app)
