@@ -22,8 +22,9 @@ module.exports = app => {
     answerDao.updateAnswer(req.params.answerId, req.body).then(data => res.send(data))
 
     findAnswerByStudentIdAndQuestionId = (req, res) =>
-    answerDao.findAnswerByQidSid(req.params.qid, req.params.sid).then(data => res.send(data))
-
+    {
+        answerDao.findAnswerByQidSid(req.params.qid, req.params.sid).then(data => res.send(data))
+    }
 
     app.get('/api/student/:sid/question/:qid/answer',findAnswerByStudentIdAndQuestionId)
     app.get('/api/question/:qid/student/:sid/answer',findAnswerByStudentIdAndQuestionId)

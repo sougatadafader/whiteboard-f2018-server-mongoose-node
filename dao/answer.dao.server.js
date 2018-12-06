@@ -10,7 +10,8 @@ findAnswerById = answerId =>
 answerModel.findById(answerId).populate('student').populate('question').exec()
 
 findAnswerByQidSid = (questionId,studentId) =>
-answerModel.find({student : studentId}).find({question : questionId})
+answerModel.find({student: studentId}).find({question: questionId}).populate('student','username').populate('question','question').exec()
+
 
 module.exports = {
     createAnswer,
