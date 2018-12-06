@@ -1,4 +1,4 @@
-const answerDao = require('../dao/Answer.dao.server')
+const answerDao = require('../dao/answer.dao.server')
 module.exports = app => {
     createAnswer = (req, res) =>
     answerDao.createAnswer(req.body).then(data=>res.json(data))
