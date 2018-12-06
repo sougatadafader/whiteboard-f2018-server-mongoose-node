@@ -12,10 +12,17 @@ answerModel.findById(answerId).populate('student').populate('question').exec()
 findAnswerByQidSid = (questionId,studentId) =>
 answerModel.find({student: studentId}).find({question: questionId}).populate('student','username').populate('question','question').exec()
 
+findAnswersByStudent = (studentId) =>
+answerModel.find({student:studentId}).populate('student','username').populate('question','question').exec()
+
+findAnswersByQuestion =(questionId) =>
+answerModel.find({question : questionId}).populate('student','usename').populate('question','question').exec()
 
 module.exports = {
     createAnswer,
     findAllAnswers,
     findAnswerById,
-    findAnswerByQidSid
+    findAnswerByQidSid,
+    findAnswersByStudent,
+    findAnswersByQuestion
 }

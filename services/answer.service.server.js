@@ -1,17 +1,19 @@
 const answerDao = require('../dao/answer.dao.server')
 module.exports = app => {
     createAnswer = (req, res) =>
-    answerDao.createAnswer(req.body).then(data=>res.json(data))
+    {
+        let ansObj = req.body
+        ansObj['student'] = req.params.sid
+        ansObj['question'] = req.params.qid
+        answerDao.createAnswer(ansObj).then(data => res.json(data))
+    }
     //res.json(AnswerDao.createAnswer(req.body))
 
     findAllAnswers = (req, res) =>
     {
-        /*console.log('Function called')
-        AnswerDao.findAllAnswers().then(function(Answers){
-            res.json(Answers)
-        })*/
         answerDao.findAllAnswers().then(data=>res.json(data))
     }
+
     findAnswerById = (req, res) =>
     answerDao.findAnswerById(req.params['answerId']).then(data=>res.json(data))
 
@@ -32,5 +34,5 @@ module.exports = app => {
     app.delete('/api/answer/:answerId', deleteAnswer)
     app.get('/api/answer/:answerId', findAnswerById)
     app.get('/api/answer', findAllAnswers)
-    app.post('/api/answer', createAnswer)
+    app.post('/api/student/:sid/question/:qid/answer', createAnswer)
 }
