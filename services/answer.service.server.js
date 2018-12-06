@@ -15,14 +15,18 @@ module.exports = app => {
     findAnswerById = (req, res) =>
     answerDao.findAnswerById(req.params['answerId']).then(data=>res.json(data))
 
-
-
     deleteAnswer = (req, res) =>
     answerDao.deleteAnswer(req.params.answerId).then(data => res.send(data))
 
     updateAnswer = (req, res) =>
     answerDao.updateAnswer(req.params.answerId, req.body).then(data => res.send(data))
 
+    findAnswerByStudentIdAndQuestionId = (req, res) =>
+    answerDao.findAnswerByQidSid(req.params.questionId, req.params.studentId).then(data => res.send(data))
+
+
+    app.get('/api/student/:sid/question/:qid/answer',findAnswerByStudentIdAndQuestionId)
+    app.get('/api/question/:qid/student/:sid/answer',findAnswerByStudentIdAndQuestionId)
     app.put('/api/answer/:answerId', updateAnswer)
     app.delete('/api/answer/:answerId', deleteAnswer)
     app.get('/api/answer/:answerId', findAnswerById)
